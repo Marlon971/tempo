@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <script src="scripts.js"></script>
+    <title>Dev</title>
+</head>
+
+<body>
+
+    <div class="caixa-maior">
+
+        <input class="input-cidade" placeholder="Digite o nome da cidade">
+        <button onclick="cliqueiNoBotao()">
+            <img class="lupa" src="https://www.svgrepo.com/show/488200/find.svg">
+        </button>
+
+        <div class="caixa-media">
+            <h2 class="cidade">Tempo em Rio de Janeiro</h2>
+            <p class="temp">28°C</p>
+
+            <img class="icone" src="https://openweathermap.org/img/wn/04n.png">
+
+            <p class="umidade">Umidade: 70%</p>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+   <div class="relogio">
+    <div id="horario">Carregando...
+    <script>
+        async function getTime() {
+            try {
+                const response = await fetch('https://worldtimeapi.org/api/timezone/America/Sao_Paulo');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                const data = await response.json();
+                let dateTime = new Date(data.datetime);
+                updateClock(dateTime);
+            } catch (error) {
+                console.error("Erro ao obter o horário:", error);
+                document.getElementById('horario').textContent = "Erro ao carregar o horário.";
+            }
+        }
+
+        function updateClock(dateTime) {
+            document.getElementById('horario').textContent = dateTime.toLocaleTimeString('pt-BR');
+            dateTime.setSeconds(dateTime.getSeconds() + 1);
+            setTimeout(() => updateClock(dateTime), 1000);
+        }
+
+        getTime();
+    </script>   
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
